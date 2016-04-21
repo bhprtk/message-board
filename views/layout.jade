@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+    link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css", rel="stylesheet")
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
+    link(rel="stylesheet", href="style.css")
+    
+    script(src="https://code.jquery.com/jquery-2.2.3.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+    script(src="main.js")
+
+  body
+    .container
+      .navbar.navbar-inverse
+        .navbar-header
+          a.navbar-brand.fa.fa-plus(href='/add')           
+          a.navbar-brand.fa.fa-comments(href='/messages')               
+          a.navbar-brand.fa.fa-home(href='/')   
+    block content
+          
+          
+
+  

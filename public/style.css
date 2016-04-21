@@ -1,0 +1,34 @@
+body{
+  background: #fafafa;
+}
+.navbar{
+  min-height: 100px;
+}
+.navbar-brand {
+  padding: 40px;
+  float: right;
+}
+.jumbotron {
+  color: #3f3f3f;
+  background: url('http://img15.deviantart.net/fbd1/i/2013/203/0/3/android_4_3_wallpaper_by_dun9000-d6eme6i.jpg');
+  background-size: cover;
+  margin-top: 20px;
+  height: 500px;
+}
+.comments {
+ color: #5886a6;
+ font-size: 200px;
+}
+.navbar-brand {
+ font-size: 50px;
+}
+.fa-comments {
+ text-align: right;
+}
+.media-object {
+ width: 200px;
+ height: 200px;
+}
+#message {
+  min-height: 400px;
+}
