@@ -3,8 +3,48 @@
 $(document).ready(init);
 
 function init() {
+  displayData();
   $('#form').submit(submitMessage);
+  // $('.container').on('click', '.glyphicon-trash', deleteContent);
 }
+
+// function deleteContent(e) {
+//   e.preventDefault();
+//   var id = $(this).parent().parent().find('.id').text();
+//   $.ajax({
+//     url: `/messages`,
+//     type: 'DELETE',
+//     success: function(id) {
+//       console.log('Delete request sent!');
+//     }
+//   });
+// }
+
+function displayData() {
+  $.get("/messages/get")
+  .done(function(data) {
+    appendMessages(data);
+  })
+  .fail(function(error) {
+    console.log('error:', error);
+  });
+}
+
+function appendMessages(data) {
+  data.forEach(function(d) {
+    var $card = $('.template').clone();
+    $card.removeClass('template');
+    $card.find('img').attr('src', d.image);
+    $card.find('h2').text(d.topic);
+    $card.find('.name').text(d.name);
+    $card.find('.time').text(d.time);
+    $card.find('.message').text(d.message);
+    $card.find('.id').text(d.id);
+
+    $('.card').prepend($card);
+  });
+}
+
 
 function submitMessage(event) {
   event.preventDefault();
@@ -13,14 +53,23 @@ function submitMessage(event) {
   var message = $('#message').val();
   var image = $('#image').val();
 
-  var $card = $(".template").clone();
-  $card.removeClass('template');
+  var messageData = {
+    name: name,
+    topic: topic,
+    message: message,
+    image: image
+  };
 
-  $card.find('.img').attr("src", image);
-  $card.find('.h2').text(topic);
-  // $card.find('.h5').text(topic);
-  $card.find('.p').text(message);
+  postData(messageData);
+  window.location.replace("/messages");
+}
 
-  console.log($('.card'));
-  window.location.replace('/messages');
+function postData(data) {
+  $.post("/messages", data)
+    .done(function() {
+      console.log("Succesfully posted!");
+  })
+    .fail(function(error) {
+      console.log('error:', error);
+    });
 }

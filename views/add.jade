@@ -3,17 +3,17 @@ extends ./layout.jade
 block content
   .container
     
+    form#form
       .form-group
         label(for='name') Name
-        input#name.form-control(type='text', placeholder='Name')
+        input#name.form-control(type='text', placeholder='Name' required)
       .form-group
         label(for='topic') Topic
-        input#topic.form-control(type='text', placeholder='Topic')
+        input#topic.form-control(type='text', placeholder='Topic' required)
       .form-group
         label(for='image') Image URL
         input#image.form-control(type='text', placeholder='Image URL')
-      form#form
         .form-group
           label(for='message') Message
-          textarea#message.form-control(type='text', placeholder='Message')
-        button.btn.btn-default(type='submit') Submit
+          textarea#message.form-control(type='text', placeholder='Message' required)
+        button.btn.btn-default(type='submit', href='/messages') Submit

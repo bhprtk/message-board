@@ -1,6 +1,6 @@
 'use strict';
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 let jade = require('jade');
 let http = require('http');

@@ -32,3 +32,9 @@ body{
 #message {
   min-height: 400px;
 }
+.id {
+  display: none;
+}
+.template {
+  display: none;
+}
