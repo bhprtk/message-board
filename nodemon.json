@@ -1,0 +1,4 @@
+// anything changed in the database, do not restart the server
+{
+  "ignore": ["data/*"]
+}

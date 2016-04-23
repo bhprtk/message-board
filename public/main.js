@@ -5,22 +5,63 @@ $(document).ready(init);
 function init() {
   displayData();
   $('#form').submit(submitMessage);
-  // $('.container').on('click', '.glyphicon-trash', deleteContent);
+  $('.container').on('click', '.glyphicon-trash', deleteContent);
+  // $('.container').on('click', '.glyphicon-pencil', gatherContent);
 }
 
-// function deleteContent(e) {
-//   e.preventDefault();
-//   var id = $(this).parent().parent().find('.id').text();
-//   $.ajax({
-//     url: `/messages`,
-//     type: 'DELETE',
-//     success: function(id) {
-//       console.log('Delete request sent!');
-//     }
-//   });
+// function gatherContent(e) {
+//   $('#myModal').modal('show');
+//   // e.preventDefault();
+//   // var loadingObj = {};
+//   // var messages = $(this).parent().parent();
+//   // loadingObj.name = messages.find('.name').text();
+//   // loadingObj.topic = messages.find('.topic').text();
+//   // loadingObj.message = messages.find('.message').text();
+//   // loadingObj.image = messages.find('img').attr("src");
+//   // loadingObj.id = messages.find('.id').text();
+//   //
+//   // loadContent(loadingObj);
+//
 // }
 
+// function loadContent(obj) {
+//   $.ajax({
+//     url: '/messages/getone',
+//     method: 'GET',
+//     data: {id: id},
+//     success: function(loadingData) {
+//       console.log(loadingData[0].name);
+//       $('#edit-name').val(loadingData[0].name);
+//       //loadingObj.name = loadingData[0].name;
+//     },
+//     fail: function() {
+//       console.log('failed');
+//     }
+//   });
+//
+//   $('#name').val(name);
+//
+// }
+
+function deleteContent(e) {
+  e.preventDefault();
+  var r = confirm("Are you sure you want to delete this message?");
+  if(r) {
+    var id = $(this).parent().parent().find('.id').text();
+    $.ajax({
+      url: '/messages',
+      type: 'DELETE',
+      data: {id: id},
+      success: function() {
+        displayData();
+      }
+    });
+  }
+}
+
 function displayData() {
+  $('.card').empty();
+
   $.get("/messages/get")
   .done(function(data) {
     appendMessages(data);

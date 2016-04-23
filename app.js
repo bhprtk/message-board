@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 4000;
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var Messages = require('./models/messages');
+var Messages = require('./models/message');
 
 // app declaration
 var app = express();
@@ -24,39 +24,17 @@ app.route('/')
     res.render('index');
   });
 
-app.route('/messages')
-  .get((req, res, next) => {
-    res.render('messages');
-  })
-  .post((req, res, next) => {
-    Messages.create(req.body, err => {
-      if(err){
-        return res.status(400).send(err);
-      }
-      res.send();
-    });
-  });
+app.use('/messages', require('./routes/messages'));
 
-  // app.route('messages/:id')
-  // .delete((req, res, next) => {
-  //   var id = req.query;
-  //   console.log(id);
-  //     // Messages.removeById(id, err => {
-  //     // });
-  //
-  // });
-
-app.route('/messages/get')
-  .get((req, res, next) => {
-    Messages.findAll((err, messages) => {
-      if(err)return res.status(404).send('Cannot find the fucking messages.');
-      res.send(messages);
-    })
-  });
 
 app.route('/add')
   .get((req, res, next) => {
     res.render('add');
+  });
+
+app.route('/edit')
+  .get((req, res, next) => {
+    res.render('edit');
   });
 
 
