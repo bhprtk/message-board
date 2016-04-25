@@ -5,7 +5,7 @@ var uuid = require('uuid');
 let moment = require('moment');
 let date = moment().format('MMMM Do YYYY, h:mm:ss a');
 
-db.run('CREATE TABLE IF NOT EXISTS messages (image TEXT, topic TEXT, name TEXT, time TEXT, message TEXT, id TEXT)');
+db.run('CREATE TABLE IF NOT EXISTS messages (topic TEXT, name TEXT, time TEXT, message TEXT, id TEXT)');
 
 
 exports.findAll = function(cb) {
@@ -30,8 +30,14 @@ exports.create = function(message, cb) {
   // add validation maybe
 
   db.serialize(function() {
-    var stmt = db.prepare("INSERT INTO messages VALUES (?, ?, ?, ?, ?, ?)");
-    stmt.run(message.image, message.topic, message.name, message.time, message.message, uuid());
+    var stmt = db.prepare("INSERT INTO messages VALUES (?, ?, ?, ?, ?)");
+    stmt.run(message.topic, message.name, date, message.message, uuid());
     stmt.finalize(cb);
+  });
+};
+
+exports.put = function(update, cb) {
+  db.run(`UPDATE messages SET topic = '${update.topic}', message = '${update.message}' WHERE id = '${update.id}'`, function(err, message) {
+    cb(err, message);
   });
 };

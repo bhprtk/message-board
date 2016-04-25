@@ -27,16 +27,6 @@ app.route('/')
 app.use('/messages', require('./routes/messages'));
 
 
-app.route('/add')
-  .get((req, res, next) => {
-    res.render('add');
-  });
-
-app.route('/edit')
-  .get((req, res, next) => {
-    res.render('edit');
-  });
-
 
 // 404 handler
 app.use((req, res, next) => {

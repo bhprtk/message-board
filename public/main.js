@@ -1,47 +1,53 @@
 'use strict';
 
 $(document).ready(init);
-
 function init() {
   displayData();
-  $('#form').submit(submitMessage);
-  $('.container').on('click', '.glyphicon-trash', deleteContent);
-  // $('.container').on('click', '.glyphicon-pencil', gatherContent);
+  $('#myForm').submit(submitMessage);
+  $('.card').on('click', '.delete', deleteContent);
+  $('.card').on('click', '.edit', editContent);
 }
 
-// function gatherContent(e) {
-//   $('#myModal').modal('show');
-//   // e.preventDefault();
-//   // var loadingObj = {};
-//   // var messages = $(this).parent().parent();
-//   // loadingObj.name = messages.find('.name').text();
-//   // loadingObj.topic = messages.find('.topic').text();
-//   // loadingObj.message = messages.find('.message').text();
-//   // loadingObj.image = messages.find('img').attr("src");
-//   // loadingObj.id = messages.find('.id').text();
-//   //
-//   // loadContent(loadingObj);
-//
-// }
+function editContent(e) {
+  e.preventDefault();
+  $('#myModal').modal(open);
+  var name = $(this).parent().parent().find('.name').text();
+  var topic = $(this).parent().parent().find('.topic').text();
+  var message = $(this).parent().parent().find('.message').text();
+  var id = $(this).parent().parent().find('.id').text();
 
-// function loadContent(obj) {
-//   $.ajax({
-//     url: '/messages/getone',
-//     method: 'GET',
-//     data: {id: id},
-//     success: function(loadingData) {
-//       console.log(loadingData[0].name);
-//       $('#edit-name').val(loadingData[0].name);
-//       //loadingObj.name = loadingData[0].name;
-//     },
-//     fail: function() {
-//       console.log('failed');
-//     }
-//   });
-//
-//   $('#name').val(name);
-//
-// }
+  $('#edit-name').val(name);
+  $('#edit-topic').val(topic);
+  $('#edit-message').val(message);
+  $('#edit-id').val(id);
+
+  $('#save').click(putData);
+}
+
+function putData() {
+  var topic = $('#edit-topic').val();
+  var message = $('#edit-message').val();
+  var id = $('#edit-id').val();
+
+  var newData = {
+    topic: topic,
+    message: message,
+    id: id
+  }
+
+  $.ajax({
+    url: "/messages",
+    type: 'PUT',
+    data: newData,
+    success: function() {
+      console.log('update successful!');
+      displayData();
+    },
+    fail: function() {
+      console.log("update failed!");
+    }
+  });
+}
 
 function deleteContent(e) {
   e.preventDefault();
@@ -75,8 +81,7 @@ function appendMessages(data) {
   data.forEach(function(d) {
     var $card = $('.template').clone();
     $card.removeClass('template');
-    $card.find('img').attr('src', d.image);
-    $card.find('h2').text(d.topic);
+    $card.find('.topic').text(d.topic);
     $card.find('.name').text(d.name);
     $card.find('.time').text(d.time);
     $card.find('.message').text(d.message);
@@ -87,22 +92,21 @@ function appendMessages(data) {
 }
 
 
-function submitMessage(event) {
-  event.preventDefault();
+function submitMessage(e) {
+  e.preventDefault();
   var name = $('#name').val();
   var topic = $('#topic').val();
   var message = $('#message').val();
-  var image = $('#image').val();
 
   var messageData = {
     name: name,
     topic: topic,
-    message: message,
-    image: image
+    message: message
   };
 
   postData(messageData);
-  window.location.replace("/messages");
+  document.getElementById("myForm").reset();
+  displayData();
 }
 
 function postData(data) {

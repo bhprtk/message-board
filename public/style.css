@@ -1,12 +1,19 @@
 body{
   background: #fafafa;
 }
+.container{
+  padding-top: 75px;
+}
 .navbar{
   min-height: 100px;
 }
+.navbar-header{
+  width: 100%;
+  text-align: center;
+}
 .navbar-brand {
   padding: 40px;
-  float: right;
+  float: none;
 }
 .jumbotron {
   color: #3f3f3f;
@@ -25,16 +32,93 @@ body{
 .fa-comments {
  text-align: right;
 }
-.media-object {
- width: 200px;
- height: 200px;
-}
-#message {
-  min-height: 400px;
+.message {
+  min-height: 100px;
 }
 .id {
   display: none;
 }
 .template {
   display: none;
+}
+
+/* New Design */
+
+.media-object {
+  margin-left: 15px;
+  margin-right: 10px;
+  margin-top: 50px;
+  width: 100px;
+  height: 100px;
+}
+
+.message-header {
+  display: inline-block;
+  padding-top: 10px;
+  width: 100%;
+  margin-bottom: -15px;
+}
+.input-name {
+    border: none;
+    height: 40px;
+    padding-left: 10px;
+    width: 40%;
+}
+.input-topic {
+    border: none;
+    border-right: 1px solid #fafafa;
+    height: 40px;
+    width: 60%;
+}
+
+.input-message {
+  border: none;
+  padding-top: 10px;
+}
+.message-footer {
+  text-align: right;
+  padding-right: 15px;
+}
+*:focus {
+  outline: none;
+}
+.media-input-message {
+  background: white;
+  color: black;
+  width: 60%;
+  height: 100%;
+  margin: auto;
+  margin-bottom: 50px;
+}
+.media-message {
+  background: white;
+  color: black;
+  width: 60%;
+}
+.btn {
+  width: 75px;
+  margin: 10px;
+}
+
+hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 30px;
+}
+
+.time {
+  float: right;
+  padding-right: 30px;
+}
+
+.modal-dialog {
+  width: 60%;
+}
+
+.display-header {
+  margin-bottom: 10px;
+}
+
+.message{
+  margin-top: 10px;
 }

@@ -2,15 +2,56 @@ extends ./layout.jade
 
 block content
   .container
-    .card
-    .media.template
+    .media.media-input-message
+      .media-left
+        img.media-object(src='http://www.sessionlogs.com/media/icons/defaultIcon.png')
+      form#myForm.media-body
+        .message-header 
+          input#topic.input-topic.form-group(type="text", placeholder="topic" required)
+          input#name.input-name.form-group(type="text", placeholder="username", maxlength="30" required)
+        hr
+        textarea#message.input-message.form-group(placeholder="Enter message", rows="5", cols="70" required)
+        hr
+        .message-footer
+          button#reset.btn.btn-danger Reset
+          button#post.btn.btn-info(type="submit") Post
+    
+    .card  
+    
+    .media.media-message.template
       .media-left
         img.media-object(src='http://www.sessionlogs.com/media/icons/defaultIcon.png')
       .media-body
-        h2.media-heading Message Topic
-        h5.name Name
-        p.time time
-        p.message The message 
-        p.id id   
-        span.glyphicon.glyphicon-trash    
-      
+        .message-header.display-header 
+          h3.topic Topic
+          small
+            span.name  Name
+            small
+              span.time   Date
+          span.id
+        hr
+        p.message
+        hr
+        .message-footer
+          button.btn.btn-danger.delete Delete
+          button.btn.btn-info.edit Edit  
+          
+          
+    .modal.fade(tabindex='-1', role='dialog', id="myModal")
+      .modal-dialog
+        .modal-content.media
+          .media-left
+            img.media-object(src='http://www.sessionlogs.com/media/icons/defaultIcon.png')
+          .media-body
+            .message-header
+              input#edit-topic.input-topic(type="text", placeholder="topic")
+              input#edit-name.input-name(type="text", placeholder="username", maxlength="30", readonly)
+              p#edit-id.id
+            hr
+            textarea#edit-message.input-message(placeholder="Enter message", rows="5", cols="70")
+            hr
+            .message-footer
+              button.btn.btn-danger(type='button', data-dismiss='modal') Cancel
+              button#save.btn.btn-info(type='button', data-dismiss='modal') Save 
+                
+          

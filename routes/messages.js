@@ -32,6 +32,14 @@ router.get('/get', (req, res) => {
   });
 });
 
+// /messages/put
+router.put('/', (req, res) => {
+  Message.put(req.body, (err, messages) => {
+    if(err) return res.status(400).send(err);
+    res.send(messages);
+  });
+});
+
 router.get('/getone', (req, res) => {
   Message.findOne(req.query.id, (err, message) => {
     if(err) return res.status(400).send(err);
