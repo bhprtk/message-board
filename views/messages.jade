@@ -4,6 +4,20 @@ block content
   .container
     .media.media-input-message
       .media-left
+      .btn-group
+        button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Action 
+          span.caret
+        ul.dropdown-menu
+          li
+            a(href='#') Action
+          li
+            a(href='#') Another action
+          li
+            a(href='#') Something else here
+          li.divider(role='separator')
+          li
+            a(href='#') Separated link
+
         img.media-object(src='http://www.sessionlogs.com/media/icons/defaultIcon.png')
       form#myForm.media-body
         .message-header 
